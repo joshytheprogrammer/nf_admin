@@ -1,34 +1,29 @@
 <template>
   <section>
-    <b-field label="Name">
-      <b-input v-model="name"></b-input>
-    </b-field>
+    <h1 class="subtitle is-size-3">Create New Product</h1>
+    <div class="form">
+      <b-field label="Name">
+        <b-input v-model="product.name" placeholder="Enter the product name"></b-input>
+      </b-field>
 
-    <b-field label="Email"
-      type="is-danger"
-      message="This email is invalid">
-      <b-input type="email"
-        value="john@"
-        maxlength="30">
-      </b-input>
-    </b-field>
+      <b-field label="Price">
+        <b-input v-model="product.price" placeholder="Enter the product price"></b-input>
+      </b-field>
 
-    <b-field label="Username"
-      type="is-success"
-      message="This username is available">
-      <b-input value="johnsilver" maxlength="30"></b-input>
-    </b-field>
-
-    <b-field label="Password">
-      <b-input type="password"
-        value="iwantmytreasure"
-        password-reveal>
-      </b-input>
-    </b-field>
-
-    <b-field label="Message">
-      <b-input maxlength="200" type="textarea"></b-input>
-    </b-field>
+      <b-field label="Image">
+        <b-field class="file is-primary" :class="{'has-name': !!file}">
+          <b-upload v-model="file" class="file-label">
+            <span class="file-cta">
+                <b-icon class="file-icon" icon="upload"></b-icon>
+                <span class="file-label">Click to upload</span>
+            </span>
+            <span class="file-name" v-if="file">
+                {{ file.name }}
+            </span>
+          </b-upload>
+        </b-field>
+      </b-field>
+    </div>
   </section>
 </template>
 
@@ -36,8 +31,23 @@
 export default {
   data() {
     return {
-      name: 'John Silver'
+      product: {
+        name: '',
+        price: '',
+        image: '',
+        slug: ''
+      },
+      file: {}
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+section {
+  padding: 1rem;
+  .form {
+    // padding: 0 1rem;
+  }
+}
+</style>
