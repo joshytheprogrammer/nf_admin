@@ -29,6 +29,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -39,7 +40,31 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/firebase'
   ],
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyC__Vsco_IudvJa1vHV1ACWWgWziOXykLU',
+      authDomain: 'neas-fashion.firebaseapp.com',
+      projectId: 'neas-fashion',
+      storageBucket: 'neas-fashion.appspot.com',
+      messagingSenderId: '122770813563',
+      appId: '1:122770813563:web:24ba8fb9acabeec1b628de',
+      measurementId: 'G-VRCW6DPK4W'
+    },
+    services: {
+      auth: true,
+      firestore: true,
+      functions: false,
+      storage: true,
+      database: false,
+      messaging: false,
+      performance: false,
+      analytics: false,
+      remoteConfig: false
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -56,5 +81,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  styleResources: {
+    scss: [
+      '@/assets/scss/app.scss',
+      '@/assets/scss/mixins.scss'
+    ],
+    hoistUseStatements:  true,
+  },
 }
