@@ -1,13 +1,13 @@
 <template>
   <section>
     <h1 class="subtitle is-size-3">Create New Product</h1>
-    <div class="form">
+    <form @submit.prevent="submit" class="form">
       <b-field label="Name">
-        <b-input v-model="product.name" placeholder="Enter the product name"></b-input>
+        <b-input v-model="product.name" placeholder="Enter the product name" validation-message="Only letters, numbers and apostrophes are allowed" pattern="^[a-zA-Z 0-9]*$" required></b-input>
       </b-field>
 
       <b-field label="Price">
-        <b-input v-model="product.price" placeholder="Enter the product price"></b-input>
+        <b-input v-model="product.price" placeholder="Enter the product price" validation-message="Only numbers are allowed" pattern="^\d+$" required></b-input>
       </b-field>
 
       <b-field label="Image">
@@ -24,8 +24,8 @@
         </b-field>
       </b-field>
 
-      <b-button type="is-primary" :loading="loading">Submit</b-button>
-    </div>
+      <b-button native-type="submit" type="is-primary" :loading="loading">Submit</b-button>
+    </form>
   </section>
 </template>
 
@@ -41,6 +41,24 @@ export default {
       },
       file: {},
       loading: false
+    }
+  },
+  methods: {
+    async submit() {
+      this.loading = true
+
+      await this.$fire.firestore.collection('products').add({
+        name: this.product.name,
+        price: this.product.price
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        this.loading = false
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+        this.loading = false
+      });
     }
   }
 }
