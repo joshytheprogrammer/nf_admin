@@ -45,22 +45,44 @@ export default {
   },
   methods: {
     async submit() {
-      let slug = await this.generateSlug()
-      this.loading = true
+      this.upload()
+      // let slug = await this.generateSlug()
+      // this.loading = true
 
-      await this.$fire.firestore.collection('products').add({
-        name: this.product.name,
-        price: this.product.price,
-        slug: slug
-      })
-      .then((docRef) => {
+      // await this.$fire.firestore.collection('products').add({
+      //   name: this.product.name,
+      //   price: this.product.price,
+      //   slug: slug
+      // })
+      // .then((docRef) => {
+      //   this.$buefy.toast.open({
+      //     duration: 10000,
+      //     message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
+      //     type: 'is-success'
+      //   })
+
+      //   this.$router.push('/')
+      // })
+      // .catch((error) => {
+      //   this.$buefy.toast.open({
+      //     duration: 5000,
+      //     message: `Something went wrong - ${error}`,
+      //     type: 'is-danger'
+      //   })
+
+      //   this.loading = false
+      // });
+    },
+    async upload() {
+      let ref = await this.$fire.storage.ref().child('Products/'+this.file.name)
+
+      await ref.put(this.file)
+      .then(() => {
         this.$buefy.toast.open({
-          duration: 10000,
-          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
+          duration: 5000,
+          message: 'Upload successful',
           type: 'is-success'
         })
-
-        this.$router.push('/')
       })
       .catch((error) => {
         this.$buefy.toast.open({
@@ -68,11 +90,19 @@ export default {
           message: `Something went wrong - ${error}`,
           type: 'is-danger'
         })
+      })
 
-        this.loading = false
+      await ref.getDownloadURL()
+      .then((url) => {
+        this.product.image = url
+      })
+      .catch((error) => {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `Something went wrong - ${error.code}`,
+          type: 'is-danger'
+        })
       });
-    },
-    async upload() {
 
     },
     generateSlug() {
