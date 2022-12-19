@@ -54,13 +54,26 @@ export default {
         slug: slug
       })
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-        this.loading = false
+        this.$buefy.toast.open({
+          duration: 10000,
+          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
+          type: 'is-success'
+        })
+
+        this.$router.push('/')
       })
       .catch((error) => {
-        console.error("Error adding document: ", error);
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `Something went wrong - ${error}`,
+          type: 'is-danger'
+        })
+
         this.loading = false
       });
+    },
+    async upload() {
+
     },
     generateSlug() {
       let name = this.product.name
