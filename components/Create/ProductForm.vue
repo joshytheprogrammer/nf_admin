@@ -3,16 +3,16 @@
     <h1 class="subtitle is-size-3">Create New Product</h1>
     <form @submit.prevent="submit" class="form">
       <b-field label="Name">
-        <b-input v-model="product.name" placeholder="Enter the product name" validation-message="Only letters, numbers and apostrophes are allowed" pattern="^[a-zA-Z 0-9]*$" required></b-input>
+        <b-input v-model="product.name" placeholder="Enter the product name" validation-message="Only letters, numbers and apostrophes are allowed" pattern="^[a-zA-Z 0-9]*$" :disabled="loading" required></b-input>
       </b-field>
 
       <b-field label="Price">
-        <b-input v-model="product.price" placeholder="Enter the product price" validation-message="Only numbers are allowed" pattern="^\d+$" required></b-input>
+        <b-input v-model="product.price" placeholder="Enter the product price" validation-message="Only numbers are allowed" pattern="^\d+$" :disabled="loading" required></b-input>
       </b-field>
 
       <b-field label="Image">
         <b-field class="file is-primary" :class="{'has-name': !!file}">
-          <b-upload v-model="file" class="file-label">
+          <b-upload v-model="file" accept=".jpg, .JPG, .png, .PNG, .jpeg, .JPEG" class="file-label" validation-message="Only jpg, jpeg and png are allowed" :disabled="loading" required>
             <span class="file-cta">
                 <b-icon class="file-icon" icon="upload"></b-icon>
                 <span class="file-label">Click to upload</span>
@@ -45,33 +45,34 @@ export default {
   },
   methods: {
     async submit() {
-      this.upload()
-      // let slug = await this.generateSlug()
-      // this.loading = true
+      this.loading = true
+      let slug = await this.generateSlug()
+      await this.upload()
 
-      // await this.$fire.firestore.collection('products').add({
-      //   name: this.product.name,
-      //   price: this.product.price,
-      //   slug: slug
-      // })
-      // .then((docRef) => {
-      //   this.$buefy.toast.open({
-      //     duration: 10000,
-      //     message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
-      //     type: 'is-success'
-      //   })
+      await this.$fire.firestore.collection('products').add({
+        name: this.product.name,
+        price: this.product.price,
+        image: this.product.image,
+        slug: slug
+      })
+      .then((docRef) => {
+        this.$buefy.toast.open({
+          duration: 10000,
+          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
+          type: 'is-success'
+        })
 
-      //   this.$router.push('/')
-      // })
-      // .catch((error) => {
-      //   this.$buefy.toast.open({
-      //     duration: 5000,
-      //     message: `Something went wrong - ${error}`,
-      //     type: 'is-danger'
-      //   })
+        this.$router.push('/')
+      })
+      .catch((error) => {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `Something went wrong - ${error}`,
+          type: 'is-danger'
+        })
 
-      //   this.loading = false
-      // });
+        this.loading = false
+      });
     },
     async upload() {
       let ref = await this.$fire.storage.ref().child('Products/'+this.file.name)
