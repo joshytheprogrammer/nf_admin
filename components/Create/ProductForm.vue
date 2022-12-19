@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { uuid } from 'vue-uuid'
 export default {
   data() {
     return {
@@ -37,7 +38,6 @@ export default {
         name: '',
         price: '',
         image: '',
-        slug: ''
       },
       file: {},
       loading: false
@@ -45,11 +45,13 @@ export default {
   },
   methods: {
     async submit() {
+      let slug = await this.generateSlug()
       this.loading = true
 
       await this.$fire.firestore.collection('products').add({
         name: this.product.name,
-        price: this.product.price
+        price: this.product.price,
+        slug: slug
       })
       .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
@@ -59,6 +61,17 @@ export default {
         console.error("Error adding document: ", error);
         this.loading = false
       });
+    },
+    generateSlug() {
+      let name = this.product.name
+
+      name = name.toLowerCase()
+
+      name = name.replace(/\s/g, "-")
+
+      name = name + "-" + uuid.v4()
+
+      return name
     }
   }
 }
