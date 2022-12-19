@@ -23,6 +23,8 @@
           </b-upload>
         </b-field>
       </b-field>
+
+      <b-button type="is-primary" :loading="loading">Submit</b-button>
     </div>
   </section>
 </template>
@@ -37,7 +39,8 @@ export default {
         image: '',
         slug: ''
       },
-      file: {}
+      file: {},
+      loading: false
     }
   }
 }
@@ -46,8 +49,13 @@ export default {
 <style lang="scss" scoped>
 section {
   padding: 1rem;
-  .form {
-    // padding: 0 1rem;
-  }
+  margin: 1rem auto;
+
+  width: 400px;
+
+  display: block;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
 }
 </style>
