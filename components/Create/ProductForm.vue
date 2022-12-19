@@ -133,5 +133,9 @@ section {
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
+
+  @media screen and (max-width: $medium) {
+    max-width: 90%;
+  }
 }
 </style>
