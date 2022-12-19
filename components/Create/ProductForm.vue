@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     async submit() {
+      // https://neasfashion.demo.joshytheprogrammer.com/shop/
       this.loading = true
       let slug = await this.generateSlug()
       await this.upload()
@@ -58,7 +59,7 @@ export default {
       .then((docRef) => {
         this.$buefy.toast.open({
           duration: 10000,
-          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
+          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="http://localhost:3000/shop/${slug}" target="_blank" >View</a> `,
           type: 'is-success'
         })
 
@@ -72,7 +73,7 @@ export default {
         })
 
         this.loading = false
-      });
+      })
     },
     async upload() {
       let ref = await this.$fire.storage.ref().child('Products/'+this.file.name)
@@ -103,7 +104,7 @@ export default {
           message: `Something went wrong - ${error.code}`,
           type: 'is-danger'
         })
-      });
+      })
 
     },
     generateSlug() {
