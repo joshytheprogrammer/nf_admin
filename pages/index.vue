@@ -16,7 +16,7 @@ export default {
   components: {
     Products,
     Categories
-  }
+  },
 }
 </script>
 

@@ -26,15 +26,15 @@
         {{ props.row.id }}
       </b-table-column>
 
-      <b-table-column field="name" label="First Name" sortable v-slot="props">
+      <b-table-column field="name" label="Name" sortable v-slot="props">
         {{ props.row.name }}
       </b-table-column>
 
-      <b-table-column field="image" label="Last Name" sortable v-slot="props">
+      <b-table-column field="image" label="Image" sortable v-slot="props">
         {{ props.row.image }}
       </b-table-column>
 
-      <b-table-column field="price" label="Date" sortable centered v-slot="props">
+      <b-table-column field="price" label="Price" sortable centered v-slot="props">
         {{ props.row.price }}
       </b-table-column>
 
