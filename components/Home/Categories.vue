@@ -1,6 +1,6 @@
 <template>
   <div class="categories">
-    
+    working 2
   </div>
 </template>
 
