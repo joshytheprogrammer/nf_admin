@@ -10,15 +10,10 @@
         <b-input v-model="product.price" placeholder="Enter the product price" validation-message="Only numbers are allowed" pattern="^\d+$" :disabled="loading" required></b-input>
       </b-field>
 
-      <!--
-        To select multiple, add the following props
-        mutiple
-        native size
-
-       -->
-
       <b-field label="Categories">
         <b-select
+          multiple
+          native-size="2"
           placeholder="Pick this products categories"
           :loading="catLoading"
           required
