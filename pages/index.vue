@@ -10,8 +10,9 @@
 </template>
 
 <script>
+import Products from "~/components/Home/Products.vue"
 export default {
-
+  
 }
 </script>
 
