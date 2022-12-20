@@ -10,6 +10,25 @@
         <b-input v-model="product.price" placeholder="Enter the product price" validation-message="Only numbers are allowed" pattern="^\d+$" :disabled="loading" required></b-input>
       </b-field>
 
+      <!--
+        To select multiple, add the following props
+        mutiple
+        native size
+
+       -->
+
+      <b-field label="Categories">
+        <b-select
+          placeholder="Pick this products categories"
+          :loading="catLoading"
+          required
+          v-model="product.categories">
+          <option v-for="option in allCategories" :key="option.id" :value="option.id">
+            {{option.name}}
+          </option>
+        </b-select>
+      </b-field>
+
       <b-field label="Image">
         <b-field class="file is-primary" :class="{'has-name': !!file}">
           <b-upload v-model="file" accept=".jpg, .JPG, .png, .PNG, .jpeg, .JPEG" class="file-label" validation-message="Only jpg, jpeg and png are allowed" :disabled="loading" required>
@@ -22,24 +41,6 @@
             </span>
           </b-upload>
         </b-field>
-      </b-field>
-
-      <b-field label="Categories">
-        <b-select
-          multiple
-          native-size="8"
-          placeholder="Pick this products categories"
-          v-model="product.categories">
-          <option value="flint">Flint</option>
-          <option value="silver">Silver</option>
-          <option value="vane">Vane</option>
-          <option value="billy">Billy</option>
-          <option value="jack">Jack</option>
-          <option value="heisenberg">Heisenberg</option>
-          <option value="jesse">Jesse</option>
-          <option value="saul">Saul</option>
-          <option value="mike">Mike</option>
-        </b-select>
       </b-field>
 
       <b-button native-type="submit" type="is-primary" :loading="loading">Submit</b-button>
@@ -59,8 +60,26 @@ export default {
         categories: []
       },
       file: {},
-      loading: false
+      loading: false,
+      catLoading: false,
+      allCategories: []
     }
+  },
+  async mounted() {
+    this.catLoading = true
+
+    try {
+      await this.$fire.firestore.collection('categories').orderBy('name').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.allCategories.push({id: doc.id, name: doc.data().name})
+        })
+        this.catLoading = false
+      })
+    } catch (error) {
+      this.catLoading = false
+      this.error = error.message
+    }
+
   },
   methods: {
     async submit() {
@@ -82,7 +101,8 @@ export default {
         name: this.product.name,
         price: this.product.price,
         image: this.product.image,
-        slug: slug
+        slug: slug,
+        categories: this.product.categories
       })
       .then((docRef) => {
         this.$buefy.toast.open({
