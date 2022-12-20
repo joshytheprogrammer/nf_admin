@@ -31,7 +31,7 @@
       </b-table-column>
 
       <b-table-column field="image" label="Image" sortable v-slot="props">
-        {{ props.row.image }}
+        <img :src="props.row.image" :alt="props.row.name + ' image'">
       </b-table-column>
 
       <b-table-column field="price" label="Price" sortable centered v-slot="props">
@@ -56,17 +56,17 @@ export default {
       sortIcon: 'arrow-up',
       sortIconSize: 'is-small',
       currentPage: 1,
-      perPage: 5,
+      perPage: 3,
       hasInput: false,
       paginationOrder: '',
       inputPosition: '',
       inputDebounce: ''
     }
   },
-  async mounted() {
+  async fetch() {
     try {
       this.loading = true
-      await this.$fire.firestore.collection('products').get().then((querySnapshot) => {
+      await this.$fire.firestore.collection('products').orderBy('name').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           this.data.push({id: doc.id, image: doc.data().image, name: doc.data().name, price: doc.data().price, slug: doc.data().slug})
         })
@@ -83,3 +83,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.table {
+  tr td img {
+    object-fit: contain;
+    width: 100%;
+    max-width: 100px;
+    max-height: 100px
+  }
+}
+</style>

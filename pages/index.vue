@@ -1,10 +1,10 @@
 <template>
   <b-tabs size="is-medium" position="is-centered" type="is-toggle" expanded>
-    <b-tab-item label="Products" icon="store">
-      <Products />
-    </b-tab-item>
     <b-tab-item label="Categories" icon="basket-outline">
       <Categories />
+    </b-tab-item>
+    <b-tab-item label="Products" icon="store">
+      <Products />
     </b-tab-item>
   </b-tabs>
 </template>
