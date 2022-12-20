@@ -45,10 +45,18 @@ export default {
   },
   methods: {
     async submit() {
-      // https://neasfashion.demo.joshytheprogrammer.com/shop/
+      // https://neasfashion.demo.joshytheprogrammer.com/shop/ http://localhost:3000/shop/
+
+      // Start Loading animation
       this.loading = true
+
+      // Upload file and check if all is well
+      if(!(await this.upload())) {
+        return
+      }
+
+      // Generate product slug using random numbers
       let slug = await this.generateSlug()
-      await this.upload()
 
       await this.$fire.firestore.collection('products').add({
         name: this.product.name,
@@ -59,7 +67,7 @@ export default {
       .then((docRef) => {
         this.$buefy.toast.open({
           duration: 10000,
-          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="http://localhost:3000/shop/${slug}" target="_blank" >View</a> `,
+          message: `Document created successfully with ID - ${docRef.id} -  <a style="color: white;" href="https://neasfashion.demo.joshytheprogrammer.com/shop/${slug}" target="_blank" >View</a> `,
           type: 'is-success'
         })
 
@@ -76,6 +84,16 @@ export default {
       })
     },
     async upload() {
+      // Test file size
+      if(this.file.size >= 512000) {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `File should be less than 500kb`,
+          type: 'is-danger'
+        })
+        return
+      }
+
       let ref = await this.$fire.storage.ref().child('Products/'+this.file.name)
 
       await ref.put(this.file)
@@ -105,6 +123,8 @@ export default {
           type: 'is-danger'
         })
       })
+
+      return true
 
     },
     generateSlug() {
