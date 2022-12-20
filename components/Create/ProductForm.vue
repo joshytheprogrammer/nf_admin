@@ -24,6 +24,24 @@
         </b-field>
       </b-field>
 
+      <b-field label="Categories">
+        <b-select
+          multiple
+          native-size="8"
+          placeholder="Pick this products categories"
+          v-model="product.categories">
+          <option value="flint">Flint</option>
+          <option value="silver">Silver</option>
+          <option value="vane">Vane</option>
+          <option value="billy">Billy</option>
+          <option value="jack">Jack</option>
+          <option value="heisenberg">Heisenberg</option>
+          <option value="jesse">Jesse</option>
+          <option value="saul">Saul</option>
+          <option value="mike">Mike</option>
+        </b-select>
+      </b-field>
+
       <b-button native-type="submit" type="is-primary" :loading="loading">Submit</b-button>
     </form>
   </section>
@@ -38,6 +56,7 @@ export default {
         name: '',
         price: '',
         image: '',
+        categories: []
       },
       file: {},
       loading: false
@@ -52,6 +71,7 @@ export default {
 
       // Upload file and check if all is well
       if(!(await this.upload())) {
+        this.loading = false
         return
       }
 
