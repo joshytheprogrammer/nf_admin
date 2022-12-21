@@ -22,7 +22,7 @@
       :page-input-position="inputPosition"
       :debounce-page-input="inputDebounce">
 
-      <b-table-column field="id" label="ID" width="40" sortable numeric v-slot="props">
+      <b-table-column field="id" label="ID" width="40" numeric v-slot="props">
         {{ props.row.id }}
       </b-table-column>
 
@@ -30,12 +30,18 @@
         {{ props.row.name }}
       </b-table-column>
 
-      <b-table-column field="image" label="Image" sortable v-slot="props">
+      <b-table-column field="image" label="Image" v-slot="props">
         <img :src="props.row.image" :alt="props.row.name + ' image'">
       </b-table-column>
 
       <b-table-column field="price" label="Price" sortable centered v-slot="props">
         {{ props.row.price }}
+      </b-table-column>
+
+      <b-table-column field="actions" label="Slug" centered v-slot="props">
+        <div class="actions">
+          <span><a target="_blank" :href="'https://neasfashion.demo.joshytheprogrammer.com/shop/'+props.row.slug">View</a></span>
+        </div>
       </b-table-column>
 
     </b-table>

@@ -17,14 +17,6 @@
         Category
       </b-navbar-item>
     </b-navbar-dropdown>
-    <b-navbar-dropdown label="Edit">
-      <b-navbar-item href="/edit/product">
-        Product
-      </b-navbar-item>
-      <b-navbar-item href="/edit/category">
-        Category
-      </b-navbar-item>
-    </b-navbar-dropdown>
   </template>
   </b-navbar>
 </template>
