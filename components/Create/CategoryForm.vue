@@ -104,7 +104,7 @@ export default {
 
       await ref.getDownloadURL()
       .then((url) => {
-        this.product.image = url
+        this.category.image = url
       })
       .catch((error) => {
         this.$buefy.toast.open({
