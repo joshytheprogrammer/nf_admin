@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="subtitle is-size-3">Create new product category</h1>
+    <h1 class="subtitle is-size-3">Create new category</h1>
     <form @submit.prevent="submit" class="form">
       <b-field label="Name">
         <b-input v-model="category.name" placeholder="Enter the product name" validation-message="Only letters, numbers and apostrophes are allowed" pattern="^[a-zA-Z 0-9 ']*$" :disabled="loading" required></b-input>
