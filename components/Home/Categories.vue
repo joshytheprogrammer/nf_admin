@@ -36,7 +36,7 @@
 
       <b-table-column field="actions" label="Slug" centered v-slot="props">
         <div class="actions">
-          <span><a target="_blank" :href="'https://neasfashion.demo.joshytheprogrammer.com/#'+props.row.id">View</a></span>
+          <span><a target="_blank" :href="'https://neas-fashion.onrender.com/#'+props.row.id">View</a></span>
         </div>
       </b-table-column>
       <!-- '#'item.id+ -->

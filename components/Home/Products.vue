@@ -40,7 +40,7 @@
 
       <b-table-column field="actions" label="Slug" centered v-slot="props">
         <div class="actions">
-          <span><a target="_blank" :href="'https://neasfashion.demo.joshytheprogrammer.com/shop/'+props.row.slug">View</a></span>
+          <span><a target="_blank" :href="'https://neas-fashion.onrender.com/shop/'+props.row.slug">View</a></span>
         </div>
       </b-table-column>
 
