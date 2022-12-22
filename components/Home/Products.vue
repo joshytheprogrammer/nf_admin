@@ -12,7 +12,7 @@
       :pagination-rounded="isPaginationRounded"
       :sort-icon="sortIcon"
       :sort-icon-size="sortIconSize"
-      default-sort="user.first_name"
+      default-sort="name"
       aria-next-label="Next page"
       aria-previous-label="Previous page"
       aria-page-label="Page"
