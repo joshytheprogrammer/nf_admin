@@ -1,5 +1,7 @@
 export const state = () => ({
-
+  user: {
+    
+  }
 })
 
 export const mutations = {
@@ -18,7 +20,7 @@ export const mutations = {
 }
 
 export const actions = {
-  onAuthStateChangedAction() {
+  onAuthStateChangedAction(ctx, { authUser, claims }) {
     if (!authUser) {
       // claims = null
       // Perform logout operations

@@ -54,7 +54,13 @@ export default {
       measurementId: 'G-VRCW6DPK4W'
     },
     services: {
-      auth: true,
+      auth: {
+        initialize: {
+          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          subscribeManually: false
+        },
+        emulatorPort: undefined,
+      },
       firestore: true,
       functions: false,
       storage: true,
@@ -64,18 +70,6 @@ export default {
       analytics: false,
       remoteConfig: false
     }
-  },
-
-  auth: {
-    persistence: 'local', // default
-    initialize: {
-      onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
-      onAuthStateChangedAction: 'onAuthStateChangedAction',
-      subscribeManually: false
-    },
-    ssr: false, // default
-    emulatorPort: 9099,
-    emulatorHost: 'http://localhost',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

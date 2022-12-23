@@ -28,18 +28,25 @@
 export default {
   methods: {
     async logout() {
-      try {
-        await this.$fire.auth.signOut()
-        .then(() => {
-          this.$buefy.toast.open({
-            duration: 10000,
-            message: 'Logout successful',
-            type: 'is-success'
-          })
+
+      await this.$fire.auth.signOut()
+      .then(() => {
+        this.$buefy.toast.open({
+          duration: 10000,
+          message: 'Logout successful',
+          type: 'is-success'
         })
-      } catch (e) {
-        alert(e)
-      }
+        this.$router.push('/login')
+      })
+      .catch((error) => {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `Something went wrong - ${error.message}`,
+          type: 'is-danger'
+        })
+
+        this.loading = false
+      });
     }
   }
 }
