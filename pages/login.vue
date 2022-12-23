@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h2 class="title is-2">Login</h2>
+    <h1 class="subtitle is-size-3">Login</h1>
     <form @submit.prevent="login">
       <b-field label="Email">
         <b-input type="email" maxlength="30" :disabled="loading" v-model="user.email" required></b-input>
