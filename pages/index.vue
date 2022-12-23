@@ -1,5 +1,5 @@
 <template>
-  <b-tabs size="is-medium" position="is-centered" type="is-toggle" expanded>
+  <b-tabs size="is-medium" position="is-centered" type="is-boxed" v-model="tab">
     <b-tab-item label="Categories" icon="basket-outline">
       <Categories />
     </b-tab-item>
@@ -16,6 +16,11 @@ export default {
   components: {
     Products,
     Categories
+  },
+  data() {
+    return {
+      tab: undefined
+    }
   },
 }
 </script>
