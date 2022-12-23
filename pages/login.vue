@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <h2 class="title is-2">Login</h2>
     <form @submit.prevent="login">
       <b-field label="Email">
         <b-input type="email" maxlength="30" :disabled="loading" v-model="user.email" required></b-input>
@@ -16,6 +17,7 @@
 
 <script>
 export default {
+  layout: "none",
   data() {
     return {
       user: {
@@ -67,6 +69,11 @@ export default {
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media screen and (max-width: $medium) {
     max-width: 90%;
