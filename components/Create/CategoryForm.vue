@@ -122,7 +122,7 @@ export default {
 <style lang="scss" scoped>
 section {
   padding: 1rem;
-  margin: 1rem auto;
+  margin: 2rem auto;
 
   width: 400px;
 
