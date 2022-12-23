@@ -12,6 +12,8 @@ export const mutations = {
       uid: authUser.uid,
       email: authUser.email
     }
+
+    this.$router.push('/')
   }
 }
 

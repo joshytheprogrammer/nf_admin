@@ -18,6 +18,11 @@ export default {
       this.$router.push('/login')
       return
     }
+
+    if(this.isLoggedIn) {
+      this.$router.push('/')
+      return
+    }
   }
 }
 </script>

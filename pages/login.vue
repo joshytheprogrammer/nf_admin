@@ -41,8 +41,8 @@ export default {
           message: 'Login successful',
           type: 'is-success'
         })
+
         this.loading = false
-        this.$router.push('/')
       })
       .catch((error) => {
         this.$buefy.toast.open({
