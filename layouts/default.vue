@@ -13,14 +13,9 @@ export default {
       isLoggedIn: 'isLoggedIn',
     }),
   },
-  mounted() {
+  beforeMount() {
     if(!this.isLoggedIn) {
       this.$router.push('/login')
-      return
-    }
-
-    if(this.isLoggedIn) {
-      this.$router.push('/')
       return
     }
   }
