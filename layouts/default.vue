@@ -13,7 +13,7 @@ export default {
       isLoggedIn: 'isLoggedIn',
     }),
   },
-  beforeMount() {
+  mounted() {
     if(!this.isLoggedIn) {
       this.$router.push('/login')
       return
