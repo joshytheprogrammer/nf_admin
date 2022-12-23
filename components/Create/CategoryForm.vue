@@ -39,8 +39,6 @@ export default {
   },
   methods: {
     async submit() {
-      // https://neasfashion.demo.joshytheprogrammer.com/shop/ http://localhost:3000/shop/
-
       // Start Loading animation
       this.loading = true
 
