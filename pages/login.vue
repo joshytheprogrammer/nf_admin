@@ -34,6 +34,11 @@ export default {
         this.user.password
       )
       .then(() => {
+        this.$buefy.toast.open({
+          duration: 10000,
+          message: 'Login successful',
+          type: 'is-success'
+        })
         this.loading = false
         this.$router.push('/')
       })

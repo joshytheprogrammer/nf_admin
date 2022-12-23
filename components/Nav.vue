@@ -17,6 +17,30 @@
         Category
       </b-navbar-item>
     </b-navbar-dropdown>
+    <b-navbar-item href="/#" @click.prevent="logout">
+      Logout
+    </b-navbar-item>
   </template>
   </b-navbar>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      try {
+        await this.$fire.auth.signOut()
+        .then(() => {
+          this.$buefy.toast.open({
+            duration: 10000,
+            message: 'Logout successful',
+            type: 'is-success'
+          })
+        })
+      } catch (e) {
+        alert(e)
+      }
+    }
+  }
+}
+</script>
