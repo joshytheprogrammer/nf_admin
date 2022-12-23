@@ -28,17 +28,23 @@ export default {
   methods: {
     async login() {
       this.loading = true
-      
+
       await this.$fire.auth.signInWithEmailAndPassword(
         this.user.email,
         this.user.password
       )
+      .then(() => {
+        this.loading = false
+        this.$router.push('/')
+      })
       .catch((error) => {
         this.$buefy.toast.open({
           duration: 5000,
           message: `Something went wrong - ${error.message}`,
           type: 'is-danger'
         })
+
+        this.loading = false
       });
     }
   }
