@@ -58,7 +58,7 @@ export default {
       sortIcon: 'arrow-up',
       sortIconSize: 'is-small',
       currentPage: 1,
-      perPage: 5,
+      perPage: 3,
       hasInput: false,
       paginationOrder: '',
       inputPosition: '',
