@@ -81,7 +81,16 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      name: 'Admin Portal',
+      short_name: 'NFP',
+      description: 'Manage the Neas Fashion website',
+      lang: 'en',
+      background_color: '#8c67ef',
+      theme_color: '#7B0D1E'
+    },
+    icon: {
+      fileName: 'icon.png',
+      sizes: [64, 120, 144, 12, 192, 384, 512]
     }
   },
 
