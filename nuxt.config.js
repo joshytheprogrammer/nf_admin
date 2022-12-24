@@ -86,7 +86,7 @@ export default {
       description: 'Manage the Neas Fashion website',
       lang: 'en',
       background_color: '#8c67ef',
-      theme_color: '#7B0D1E'
+      theme_color: '#8c67ef'
     },
     icon: {
       fileName: 'icon.png',
