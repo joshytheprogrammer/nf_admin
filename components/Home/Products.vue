@@ -79,7 +79,7 @@ export default {
         this.loading = false
       })
     } catch (error) {
-      thus.loading = false
+      thss.loading = false
       this.$buefy.toast.open({
         duration: 5000,
         message: `Something went wrong - ${error}`,
